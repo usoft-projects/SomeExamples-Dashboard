@@ -1,0 +1,254 @@
+{
+  "Menumuz": [
+    {
+      "name": "Köfte",
+      "details": "Kilogram 136.00 TL",
+      "price": 29.50,
+      "image":""
+    },
+    {
+      "name": "Acılı Köfte",
+      "details": "Kilogram 140.00 TL",
+      "price": 30.50,
+      "image":""
+    },
+    {
+      "name": "Kaşarlı Köfte",
+      "details": "Kilogram 140.00 TL",
+      "price": 30.50,
+      "image":""
+    },
+    {
+      "name": "Tavuk Kanat",
+      "details": "Kilogram 104.00 TL",
+      "price": 27.00,
+      "image":""
+    },
+    {
+      "name": "Tavuk Şiş",
+      "details": "Kilogram 104.00 TL",
+      "price":26.00,
+      "image":""
+    },
+    {
+      "name": "Sucuk",
+      "details": "Kilogram 128.00 TL",
+      "price": 32.00,
+      "image":""
+    },
+    {
+      "name": "Beyti",
+      "details": "Beyti",
+      "price": 33.00,
+      "image":""
+    },
+    {
+      "name": "Adana Kebap",
+      "details": "Kilogram 165.00 TL",
+      "price": 33.00,
+      "image":""
+    },
+    {
+      "name": "Külbastı",
+      "details": "Kilogram 188.00 TL",
+      "price": 47.00,
+      "image":""
+    },
+    {
+      "name": "Kuzu Şiş",
+      "details": "Kilogram 220.00 TL",
+      "price": 44.00,
+      "image":""
+    },
+    {
+      "name": "Pirzola",
+      "details": "Kilogram 216.00 TL",
+      "price": 54.00,
+      "image":""
+    },
+    {
+      "name": "Kaburga",
+      "details": "Kilogram 172.00 TL",
+      "price": 67.00,
+      "image":""
+    },
+    {
+      "name": "Lokum",
+      "details": "Kilogram 268.00 TL",
+      "price": 67.00,
+      "image":""
+    },
+    {
+      "name": "İçli Köfte",
+      "details": "Adet",
+      "price": 9.50,
+      "image":""
+    },
+    {
+      "name": "Hamburger",
+      "details": "Hamburger",
+      "price": 19.00,
+      "image":""
+    },
+    {
+      "name": "İskender",
+      "details": "İskender",
+      "price": 37.00,
+      "image":""
+    },
+    {
+      "name": "Döner",
+      "details": "Kilogram 340.00 TL",
+      "price": 34.00,
+      "image":""
+    },
+    {
+      "name": "Et Çöp Şiş",
+      "details": "Et Çöp Şiş",
+      "price": 43.00,
+      "image":""
+    },
+    {
+      "name": "Etli Ekmek",
+      "details": "Etli Ekmek",
+      "price": 26.00,
+      "image":""
+    },
+    {
+      "name": "Bıçakarası",
+      "details": "Bıçakarası",
+      "price": 29.00,
+      "image":""
+    },
+    {
+      "name": "Mevlana",
+      "details": "Mevlana",
+      "price": 27.00,
+      "image":""
+    },
+    {
+      "name": "Börek",
+      "details": "Börek",
+      "price": 26.00,
+      "image":""
+    },
+    {
+      "name": "Recai",
+      "details": "Recai",
+      "price": 29.00,
+      "image":""
+    },
+    {
+      "name": "Karışık Pide",
+      "details": "Karışık Pide",
+      "price": 29.00,
+      "image":""
+    },
+    {
+      "name": "Salata",
+      "details": "Duble 17.00 TL" ,
+      "price": 12.00,
+      "image":""
+    },
+    {
+      "name": "Piyaz",
+      "details": "Duble 17.00 TL" ,
+      "price": 12.00,
+      "image":""
+    },
+    {
+      "name": "Çorba",
+      "details": "Çorba" ,
+      "price": 10.00,
+      "image":""
+    },
+    {
+      "name": "Çömlek Yoğurt",
+      "details": "Çömlek Yoğurt" ,
+      "price": 11.00,
+      "image":""
+    },
+    {
+      "name": "Mantar",
+      "details": "Mantar" ,
+      "price": 15.00,
+      "image":""
+    },
+    {
+      "name": "ManKızarmış Patatestar",
+      "details": "Kızarmış Patates" ,
+      "price": 9.50,
+      "image":""
+    },
+    {
+      "name": "Ekmek Kadayıfı",
+      "details": "Ekmek Kadayıfı" ,
+      "price": 15.00,
+      "image":""
+    },
+    {
+      "name": "Sütlü Tel Kadayıf",
+      "details": "Sütlü Tel Kadayıf" ,
+      "price": 15.00,
+      "image":""
+    },
+    {
+      "name": "Sütlaç",
+      "details": "Sütlaç" ,
+      "price": 15.00,
+      "image":""
+    },
+    {
+      "name": "Kabak Tatlısı",
+      "details": "Kabak Tatlısı" ,
+      "price": 15.00,
+      "image":""
+    }
+  ],
+  "İkramlarımız":[
+    {
+      "name": "İkram",
+      "details": "Ezme, Jalepano Biber, Sarımsak, Köz Domates, Biber, Pilav, Çiğ Köfte",
+      "price": 0,
+      "image":""
+    }
+  ],
+  "İçecekler":[
+    {
+      "name": "Coca Cola / Ayran",
+      "details": "1 LT",
+      "price": 11.50,
+      "image":""
+    },
+    {
+      "name": "Tombul Ayran",
+      "details": "Tombul Ayran",
+      "price": 7.00,
+      "image":""
+    },
+    {
+      "name": "Meşrubat",
+      "details": "Meşrubat",
+      "price": 8.00,
+      "image":""
+    },
+    {
+      "name": "Şalgam Suyu",
+      "details": "Şalgam Suyu",
+      "price": 7.00,
+      "image":""
+    },
+    {
+      "name": "Soda",
+      "details": "Soda",
+      "price": 4.00,
+      "image":""
+    },
+    {
+      "name": "Su",
+      "details": "S",
+      "price": 2.50,
+      "image":""
+    }
+  ]
+}

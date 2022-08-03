@@ -57,6 +57,16 @@ ref.on("value", function(snapshot) {
     console.log("Error: " + error.code);
 });
 
+//test.split("**")[0] --> key or categories
+
+//test.split("**")[1] --> name of menu
+
+//test.split("**")[2] --> details of menu
+
+//test.split("**")[3] --> price of menu
+
+//test.split("**")[4] --> image of menu
+
 function update(d){
     var test = d.id
     Swal.fire({

@@ -16,16 +16,11 @@ var local_storage = []
 var keys2 =[]
 ref.on("value", function(snapshot) {
     var interface = document.getElementById("data_firebase")
-    // console.log(snapshot.val());
-    // console.log(snapshot.val().Makarnalar[0].price)
     var test = snapshot.val()
-    // console.log(test)
     var keys = Object.keys(test);
     keys2=keys
     var datas =  Object.values(test) 
     local_storage = test
-    // console.log(keys)
-    // console.log(Object.values(test))
 
     //burası card.html ıcın
     // for(var i=0; i<keys.length; i++){
@@ -87,44 +82,61 @@ function update(d){
         if (result.isConfirmed) {
             local_storage = (JSON.stringify(local_storage))
             local_storage = (JSON.parse(local_storage))
+            var index = parseInt(test.split("**")[4])
             var categories = test.split("**")[0];
             var name = document.getElementById("name").value
             var details = document.getElementById("details").value
             var price = document.getElementById("price").value
             var file = document.getElementById("files").files[0]
-            var path = categories + "/" + name
-            var to_save_image = firebase.storage().ref(path)
-            let thisRef = to_save_image.child(file.name)
-            var index = parseInt(test.split("**")[4])
-            local_storage[categories].splice(index,1)
-            var ref = firebase.database().ref()
-            ref.set(local_storage, function () {
-                console.log("removed")
-            })
-            thisRef.put(file).then(res=>{
-				console.log("Upload Success")
-				alert("Upload Success")
-                to_save_image.child(file.name).getDownloadURL().then(url=>{
-                    console.log(url)
-                        var to_save = firebase.database().ref();
-                        var data =     
-                            {
-                            "name": name,
-                            "details": details,
-                            "price": parseFloat(price),
-                            "image": url
-                            }
-                        
-                        local_storage[categories].push(data)
-                        console.log(local_storage)
-                        to_save.set(local_storage, function () {
-                            Swal.fire("Added", '', 'info')
-                            location.reload();
-                        })
+            var link_image = test.split("**")[5]
+            var keys = test.split("**")[0]
+            if (file === undefined) {
+                console.log("tanımsız")
+                    var to_save = firebase.database().ref();
+                    var data =     
+                        {
+                        "name": name,
+                        "details": details,
+                        "price": parseFloat(price),
+                        "image": link_image
+                        }
+
+                    local_storage[keys].splice(index,1)
+                    local_storage[categories].splice(index, 0, data);
+                    console.log(local_storage)
+                    to_save.set(local_storage, function () {
+                        Swal.fire("Updated", '', 'info')
+                        location.reload();
+                    })
+              } else {
+                console.log("test")
+                var path = categories + "/" + name
+                var to_save_image = firebase.storage().ref(path)
+                let thisRef = to_save_image.child(file.name)
+                local_storage[categories].splice(index,1)
+                thisRef.put(file).then(res=>{
+                    Swal.fire("Uploaded Image, Please wait for complate", '', 'info')
+                    to_save_image.child(file.name).getDownloadURL().then(url=>{
+                            var to_save = firebase.database().ref();
+                            var data =     
+                                {
+                                "name": name,
+                                "details": details,
+                                "price": parseFloat(price),
+                                "image": url
+                                }
+                            
+                            local_storage[categories].splice(index, 0, data);
+                            console.log(local_storage)
+                            to_save.set(local_storage, function () {
+                                Swal.fire("Updated", '', 'info')
+                                location.reload();
+                            })
+                    })
+                }).catch(e =>{
+                    console.log("Error" + e)				
                 })
-			}).catch(e =>{
-				console.log("Error" + e)				
-			})
+              }
         } else if (result.isDenied) {
           Swal.fire('Changes are not saved', '', 'info') 
         }
@@ -133,7 +145,7 @@ function update(d){
 function remove(d){
     var test = d.id
     var keys = test.split("**")[0]
-
+    var link_image = test.split("**")[5]
      local_storage = (JSON.stringify(local_storage))
      local_storage = (JSON.parse(local_storage))
      var index = parseInt(test.split("**")[4])
@@ -141,7 +153,7 @@ function remove(d){
     Swal.fire({
         title: test.split("**")[0]+ ', '+test.split("**")[1],
         text: 'Are you sure you want to delete this menu from categories?',
-        imageUrl: 'https://unsplash.it/400/200',
+        imageUrl: link_image,
         imageWidth: 400,
         imageHeight: 200,
         showCancelButton: true,
@@ -196,32 +208,48 @@ function newmenu(){
             var price = document.getElementById("price").value
             var file = document.getElementById("files").files[0]
             var path = categories + "/" + name
-            var to_save_image = firebase.storage().ref(path)
-            let thisRef = to_save_image.child(file.name)
-            thisRef.put(file).then(res=>{
-				console.log("Upload Success")
-				alert("Upload Success")
-                to_save_image.child(file.name).getDownloadURL().then(url=>{
-                    console.log(url)
-                        var to_save = firebase.database().ref();
-                        var data =     
-                            {
-                            "name": name,
-                            "details": details,
-                            "price": parseFloat(price),
-                            "image": url
-                            }
-                        
-                        local_storage[categories].push(data)
-                        console.log(local_storage)
-                        to_save.set(local_storage, function () {
-                            Swal.fire("Added", '', 'info')
-                            location.reload();
-                        })
+            if (file === undefined) {
+                    var to_save = firebase.database().ref();
+                    var data =     
+                        {
+                        "name": name,
+                        "details": details,
+                        "price": parseFloat(price),
+                        "image": ""
+                        }
+
+                    local_storage[categories].push(data)
+                    console.log(local_storage)
+                    to_save.set(local_storage, function () {
+                        Swal.fire("Added", '', 'info')
+                        location.reload();
+                    })
+              }else{
+                var to_save_image = firebase.storage().ref(path)
+                let thisRef = to_save_image.child(file.name)
+                thisRef.put(file).then(res=>{
+                    Swal.fire("Uploaded Image, Please wait for complate", '', 'info')
+                    to_save_image.child(file.name).getDownloadURL().then(url=>{
+                            var to_save = firebase.database().ref();
+                            var data =     
+                                {
+                                "name": name,
+                                "details": details,
+                                "price": parseFloat(price),
+                                "image": url
+                                }
+                            
+                            local_storage[categories].push(data)
+                            console.log(local_storage)
+                            to_save.set(local_storage, function () {
+                                Swal.fire("Added", '', 'info')
+                                location.reload();
+                            })
+                    })
+                }).catch(e =>{
+                    console.log("Error" + e)				
                 })
-			}).catch(e =>{
-				console.log("Error" + e)				
-			})
+        }
         } else if (result.isDenied) {
           Swal.fire('Changes are not saved', '', 'info') 
         }
@@ -256,34 +284,52 @@ function newcategory(){
             var price = document.getElementById("price").value
             var file = document.getElementById("files").files[0]
             var path = cate + "/" + name
-            var to_save_image = firebase.storage().ref(path)
-            let thisRef = to_save_image.child(file.name)
-
-            thisRef.put(file).then(res=>{
-				console.log("Upload Success")
-				alert("Upload Success")
-                to_save_image.child(file.name).getDownloadURL().then(url=>{
-                    console.log(url)
-                        var to_save = firebase.database().ref();
-                        var data =[
-                            {
-                            "name": name,
-                            "details": details,
-                            "price": parseFloat(price),
-                            "image":url
-                            }
-                        ]
-                        
-                    local_storage[cate] = data
-                    console.log(local_storage)
-                    to_save.set(local_storage, function () {
-                        Swal.fire("Added new categories", '', 'info')
-                        location.reload();
-                    })
+            if (file === undefined) {
+                    var to_save = firebase.database().ref();
+                    var data =[
+                        {
+                        "name": name,
+                        "details": details,
+                        "price": parseFloat(price),
+                        "image":""
+                        }
+                    ]
+                    
+                local_storage[cate] = data
+                console.log(local_storage)
+                to_save.set(local_storage, function () {
+                    Swal.fire("Added new categories", '', 'info')
+                    location.reload();
                 })
-			}).catch(e =>{
-				console.log("Error" + e)				
-			})
+            }else{
+                var to_save_image = firebase.storage().ref(path)
+                let thisRef = to_save_image.child(file.name)
+                thisRef.put(file).then(res=>{
+                    Swal.fire("Uploaded Image, Please wait for complate", '', 'info')
+                    to_save_image.child(file.name).getDownloadURL().then(url=>{
+                            var to_save = firebase.database().ref();
+                            var data =[
+                                {
+                                "name": name,
+                                "details": details,
+                                "price": parseFloat(price),
+                                "image":url
+                                }
+                            ]
+                            
+                        local_storage[cate] = data
+                        console.log(local_storage)
+                        to_save.set(local_storage, function () {
+                            Swal.fire("Added new categories", '', 'info')
+                            location.reload();
+                        })
+                    })
+                }).catch(e =>{
+                    console.log("Error" + e)				
+                })
+
+        }
+
         } else if (result.isDenied) {
           Swal.fire('Changes are not saved', '', 'info') 
         }

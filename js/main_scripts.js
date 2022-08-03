@@ -1,4 +1,4 @@
-var config = {
+var config = { 
     apiKey: "AIzaSyDAl-sAyQGr3tRpK5TwfPz5lVbfyvdD5TM",
     authDomain: "onurfirebase-8f143.firebaseapp.com",
     databaseURL: "https://onurfirebase-8f143.firebaseio.com",
@@ -62,21 +62,21 @@ ref.on("value", function(snapshot) {
 
 //test.split("**")[4] --> image of menu
 
-function update(d){
+function update(d){ 
     var test = d.id
     Swal.fire({
         title: test.split("**")[0]+ ', '+test.split("**")[1],
-        html:'<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="Name" value="'+test.split("**")[1]+'"> <br>'+
-            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="Details" value="'+test.split("**")[2]+'"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Price" value="'+test.split("**")[3]+'"><br>'+
-            '<label class="btn btn-warning">  Select Image File <input type="file" id="files" name="files[]" hidden> </label>',
+        html:'<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="isim" value="'+test.split("**")[1]+'"> <br>'+
+            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik" value="'+test.split("**")[2]+'"> <br>'+
+            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat" value="'+test.split("**")[3]+'"><br>'+
+            '<label class="btn btn-warning">  Resim Seçiniz  <input type="file" id="files" name="files[]" hidden> </label>',
         imageUrl: test.split("**")[5],
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: 'Custom image',
         showCancelButton: true,
-        confirmButtonText: 'Yes, Save it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Güncelle',
+        cancelButtonText: 'Vazgeç',
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -105,7 +105,7 @@ function update(d){
                     local_storage[categories].splice(index, 0, data);
                     console.log(local_storage)
                     to_save.set(local_storage, function () {
-                        Swal.fire("Updated", '', 'info')
+                        Swal.fire("Güncellendi.", '', 'info')
                         location.reload();
                     })
               } else {
@@ -115,7 +115,7 @@ function update(d){
                 let thisRef = to_save_image.child(file.name)
                 local_storage[categories].splice(index,1)
                 thisRef.put(file).then(res=>{
-                    Swal.fire("Uploaded Image, Please wait for complate", '', 'info')
+                    Swal.fire("Resim Yüklendi. Lütfen bekleyiniz.", '', 'warning')
                     to_save_image.child(file.name).getDownloadURL().then(url=>{
                             var to_save = firebase.database().ref();
                             var data =     
@@ -129,7 +129,7 @@ function update(d){
                             local_storage[categories].splice(index, 0, data);
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
-                                Swal.fire("Updated", '', 'info')
+                                Swal.fire("Güncellendi.", '', 'info')
                                 location.reload();
                             })
                     })
@@ -138,7 +138,7 @@ function update(d){
                 })
               }
         } else if (result.isDenied) {
-          Swal.fire('Changes are not saved', '', 'info') 
+          Swal.fire('İptal Edildi.', '', 'info') 
         }
       })
 }
@@ -152,19 +152,19 @@ function remove(d){
 
     Swal.fire({
         title: test.split("**")[0]+ ', '+test.split("**")[1],
-        text: 'Are you sure you want to delete this menu from categories?',
+        text: 'Menüyü silmek istediğinize emin misiniz?',
         imageUrl: link_image,
         imageWidth: 400,
         imageHeight: 200,
         showCancelButton: true,
-        confirmButtonText: 'Yes, Delete it!',
-        cancelButtonText: 'No, cancel!'
+        confirmButtonText: 'Evet, Sil ',
+        cancelButtonText: 'Vazgeç'
       }).then((result) => {
         if (result.isConfirmed) {
             local_storage[keys].splice(index,1)
             var ref = firebase.database().ref()
             ref.set(local_storage, function () {
-                Swal.fire("Deleted", '', 'info')
+                Swal.fire("Menü Silindi.", '', 'info')
                 location.reload();
             })
         }
@@ -176,26 +176,26 @@ function remove(d){
 function newmenu(){
     console.log(keys2)
     var drop = '<select class="form-select btn btn-info " aria-label="Please Select Categories" id="categories">'+
-                '<option selected>Please Select Categories</option>'
+                '<option selected>Lütfen Kategori Seçiniz</option>'
     for(var i=0;i<keys2.length;i++){
         drop += '<option value="'+keys2[i]+'">'+keys2[i]+'</option>'
     }
     drop += '</select>'
 
     Swal.fire({
-        title: "Add New Menu to Category",
+        title: "Yeni Menü Ekle",
         html: drop +'<br><br>'+
-            '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="Name"> <br>'+
-            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="Details"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Price" ><br>'+
-            '<label class="btn btn-warning">  Select Image File <input type="file" id="files" name="files[]" hidden> </label>',
+            '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İsim"> <br>'+
+            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik"> <br>'+
+            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat" ><br>'+
+            '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
         imageUrl: 'https://unsplash.it/400/200',
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: 'Custom image',
         showCancelButton: true,
-        confirmButtonText: 'Yes, Save it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Evet, Kaydet',
+        cancelButtonText: 'Vazgeç',
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -221,14 +221,14 @@ function newmenu(){
                     local_storage[categories].push(data)
                     console.log(local_storage)
                     to_save.set(local_storage, function () {
-                        Swal.fire("Added", '', 'info')
+                        Swal.fire("Menü Eklendi.", '', 'info')
                         location.reload();
                     })
               }else{
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 thisRef.put(file).then(res=>{
-                    Swal.fire("Uploaded Image, Please wait for complate", '', 'info')
+                    Swal.fire("Resim Yüklendi. Lütfen Bekleyiniz.", '', 'warning')
                     to_save_image.child(file.name).getDownloadURL().then(url=>{
                             var to_save = firebase.database().ref();
                             var data =     
@@ -242,7 +242,7 @@ function newmenu(){
                             local_storage[categories].push(data)
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
-                                Swal.fire("Added", '', 'info')
+                                Swal.fire("Menü Eklendi", '', 'info')
                                 location.reload();
                             })
                     })
@@ -251,27 +251,27 @@ function newmenu(){
                 })
         }
         } else if (result.isDenied) {
-          Swal.fire('Changes are not saved', '', 'info') 
-        }
-      })
+          Swal.fire('Değişiklikler kaydedilemedi.', '', 'info') 
+        } 
+      }) 
 }
 
 function newcategory(){
    
     Swal.fire({
-        title: "Create New Categories",
-        html:'<input type="text" class="form-control" id="cat" aria-describedby="Categories" placeholder="Categories Name"> <br>'+
-            '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="First Menu Name"> <br>'+
-            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="Details"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Price"> <br>'+
-            '<label class="btn btn-warning">  Select Image File <input type="file" id="files" name="files[]" hidden> </label>',
+        title: "Yeni Kategori Ekle",
+        html:'<input type="text" class="form-control" id="cat" aria-describedby="Categories" placeholder="Kategori Adı"> <br>'+
+            '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İlk Menü Adı"> <br>'+ 
+            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik"> <br>'+
+            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat"> <br>'+
+            '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
         imageUrl: 'https://unsplash.it/400/200',
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: 'Custom image',
         showCancelButton: true,
-        confirmButtonText: 'Yes, Save it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Evet, Kaydet',
+        cancelButtonText: 'Vazgeç',
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -298,14 +298,14 @@ function newcategory(){
                 local_storage[cate] = data
                 console.log(local_storage)
                 to_save.set(local_storage, function () {
-                    Swal.fire("Added new categories", '', 'info')
+                    Swal.fire("Yeni kategori eklendi.", '', 'info')
                     location.reload();
                 })
             }else{
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 thisRef.put(file).then(res=>{
-                    Swal.fire("Uploaded Image, Please wait for complate", '', 'info')
+                    Swal.fire("Resim Yüklendi. Lütfen Bekleyiniz.", '', 'warning')
                     to_save_image.child(file.name).getDownloadURL().then(url=>{
                             var to_save = firebase.database().ref();
                             var data =[
@@ -320,7 +320,7 @@ function newcategory(){
                         local_storage[cate] = data
                         console.log(local_storage)
                         to_save.set(local_storage, function () {
-                            Swal.fire("Added new categories", '', 'info')
+                            Swal.fire("Yeni Kategori Eklendi.", '', 'info')
                             location.reload();
                         })
                     })
@@ -331,7 +331,7 @@ function newcategory(){
         }
 
         } else if (result.isDenied) {
-          Swal.fire('Changes are not saved', '', 'info') 
+          Swal.fire('Değişiklikler kaydedilemedi.', '', 'info') 
         }
       })
 
@@ -363,12 +363,14 @@ function deletecategory(){
 function image_view(d){
     var url = d.id
     Swal.fire({
-        title: "Image of Menu",
+        title: "Menü Resmi",
         imageUrl: url,
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: 'Custom image',
-        showCancelButton: true,
+        showCloseButton: true,
+        showCancelButton: false,
+        confirmButtonText:'Kapat.',
         })
 
 }
